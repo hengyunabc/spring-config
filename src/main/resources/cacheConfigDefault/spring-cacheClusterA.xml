@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans profile="dev">
+		<bean id="cacheClusterAFactory" class="com.test.cache.CacheFactory">
+			<property name="address" value="${cache.address.clusterA:127.0.0.1}"/>
+		</bean>
+		<bean name="cacheClusterAClient" factory-bean="cacheClusterAFactory" factory-method="getClient" />
+	</beans>
+	
+	<beans profile="test">
+		<bean id="cacheClusterAFactory" class="com.test.cache.CacheFactory">
+			<property name="address" value="${cache.address.clusterA:192.168.1.101}"/>
+		</bean>
+		<bean name="cacheClusterAClient" factory-bean="cacheClusterAFactory" factory-method="getClient" />
+	</beans>
+
+	<beans profile="product">
+		<bean id="cacheClusterAFactory" class="com.test.cache.CacheFactory">
+			<property name="address" value="${cache.address.clusterA:10.10.1.10}"/>
+		</bean>
+		<bean name="cacheClusterAClient" factory-bean="cacheClusterAFactory" factory-method="getClient" />
+	</beans>	
+</beans>
